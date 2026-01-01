@@ -20,34 +20,37 @@ export class User extends Model<
 > {
   @Column({
     primaryKey: true,
-    type: DataType.UUIDV4,
+    type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
     allowNull: false,
   })
   declare id: CreationOptional<string>;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
-  email: string;
+  declare email: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
-  password: string;
+  declare password: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
-  name: string;
+  declare name: string;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: true })
-  phone: string;
+  declare phone: string | null;
 
   @Column({ type: DataType.STRING, allowNull: true })
-  avatar: string;
+  declare avatar: string | null;
 
   @Column({ type: DataType.STRING, allowNull: true })
-  providers: string;
+  declare providers: string | null;
 
   @Column({
     type: DataType.ENUM(...Object.values(EUserRole)),
     defaultValue: EUserRole.CUSTOMER,
     allowNull: false,
   })
-  role: EUserRole;
+  declare role: CreationOptional<EUserRole>;
+
+  @Column({ type: DataType.BOOLEAN, defaultValue: false, allowNull: false })
+  declare isDeleted: CreationOptional<boolean>;
 }
