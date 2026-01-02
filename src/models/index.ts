@@ -1,2 +1,3 @@
-export { User, EUserRole } from './user.model';
 export { Category } from './category.model';
+export { Product } from './product.model';
+export { EUserRole, User } from './user.model';
