@@ -8,19 +8,18 @@ import {
   Column,
   DataType,
   ForeignKey,
-  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Product } from './product.model';
+import { Category } from './category.model';
 
 @Table({
-  tableName: 'categories',
+  tableName: 'products',
   timestamps: true,
 })
-export class Category extends Model<
-  InferAttributes<Category>,
-  InferCreationAttributes<Category>
+export class Product extends Model<
+  InferAttributes<Product>,
+  InferCreationAttributes<Product>
 > {
   @Column({
     primaryKey: true,
@@ -31,13 +30,22 @@ export class Category extends Model<
   declare id: CreationOptional<string>;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
+  declare code: string;
+
+  @Column({ type: DataType.STRING, unique: true, allowNull: false })
   declare name: string;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   declare slug: string;
 
+  @Column({ type: DataType.INTEGER, defaultValue: 0, allowNull: false })
+  declare basePrice: CreationOptional<number>;
+
+  @Column({ type: DataType.STRING, allowNull: false })
+  declare thumbnail: string;
+
   @Column({ type: DataType.TEXT, allowNull: true })
-  declare description?: string;
+  declare description: string | null;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: true, allowNull: false })
   declare isActived: CreationOptional<boolean>;
@@ -48,17 +56,9 @@ export class Category extends Model<
   @Column({ type: DataType.BOOLEAN, defaultValue: false, allowNull: false })
   declare isDeleted: CreationOptional<boolean>;
 
-  @Column({ type: DataType.INTEGER, defaultValue: 0, allowNull: false })
-  declare sortOrder: CreationOptional<number>;
-
   @ForeignKey(() => Category)
-  @Column({ type: DataType.UUID, allowNull: true })
-  declare parentId: string | null;
-  @BelongsTo(() => Category, { foreignKey: 'parentId', as: 'parent' })
-  declare parent?: Category;
-  @HasMany(() => Category, { foreignKey: 'parentId', as: 'children' })
-  declare children?: Category[];
-
-  @HasMany(() => Product, { foreignKey: 'categoryId', as: 'products' })
-  declare products: Product[];
+  @Column({ type: DataType.UUID, allowNull: false })
+  declare categoryId: string;
+  @BelongsTo(() => Category, { foreignKey: 'categoryId', as: 'category' })
+  declare category: Category;
 }
