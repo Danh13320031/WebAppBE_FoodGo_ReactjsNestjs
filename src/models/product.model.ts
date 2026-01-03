@@ -8,10 +8,12 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
 import { Category } from './category.model';
+import { ProductVariant } from './product-variant.model';
 
 @Table({
   tableName: 'products',
@@ -61,4 +63,7 @@ export class Product extends Model<
   declare categoryId: string;
   @BelongsTo(() => Category, { foreignKey: 'categoryId', as: 'category' })
   declare category: Category;
+
+  @HasMany(() => ProductVariant, { foreignKey: 'productId', as: 'variants' })
+  declare variants: ProductVariant[];
 }
