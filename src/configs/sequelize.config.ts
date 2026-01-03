@@ -14,4 +14,5 @@ export const sequelizeConfig = (
   password: configService.get<string>('DB_PASSWORD'),
   database: configService.get<string>('DB_NAME'),
   autoLoadModels: true,
+  synchronize: true,
 });
