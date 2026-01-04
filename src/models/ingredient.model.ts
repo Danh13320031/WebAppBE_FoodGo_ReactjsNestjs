@@ -8,6 +8,7 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
@@ -55,4 +56,7 @@ export class Ingredient extends Model<
   declare categoryId: string;
   @BelongsTo(() => Category, { foreignKey: 'categoryId', as: 'category' })
   declare category: Category;
+
+  @HasMany(() => Ingredient, { foreignKey: 'categoryId', as: 'ingredients' })
+  declare ingredients: Ingredient[];
 }
