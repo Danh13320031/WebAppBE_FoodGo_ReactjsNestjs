@@ -1,5 +1,6 @@
 export { Category } from './category.model';
 export { Ingredient } from './ingredient.model';
+export { ProductIngredient } from './product-ingredient.model';
 export {
   EProductVariantSize,
   EProductVariantType,
