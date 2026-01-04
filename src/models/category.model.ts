@@ -13,6 +13,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Product } from './product.model';
+import { Ingredient } from './ingredient.model';
 
 @Table({
   tableName: 'categories',
@@ -61,4 +62,7 @@ export class Category extends Model<
 
   @HasMany(() => Product, { foreignKey: 'categoryId', as: 'products' })
   declare products: Product[];
+
+  @HasMany(() => Ingredient, { foreignKey: 'categoryId', as: 'ingredients' })
+  declare ingredients: Ingredient[];
 }
