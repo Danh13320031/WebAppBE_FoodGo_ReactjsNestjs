@@ -1,3 +1,4 @@
+export { Address } from './address.model';
 export { Category } from './category.model';
 export { Ingredient } from './ingredient.model';
 export { ProductIngredient } from './product-ingredient.model';
