@@ -3,7 +3,8 @@ import type {
   InferAttributes,
   InferCreationAttributes,
 } from 'sequelize';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Address } from './address.model';
 
 export enum EUserRole {
   CUSTOMER = 'customer',
@@ -53,4 +54,7 @@ export class User extends Model<
 
   @Column({ type: DataType.BOOLEAN, defaultValue: false, allowNull: false })
   declare isDeleted: CreationOptional<boolean>;
+
+  @HasMany(() => Address, { foreignKey: 'userId', as: 'addresses' })
+  declare addresses: Address[];
 }
