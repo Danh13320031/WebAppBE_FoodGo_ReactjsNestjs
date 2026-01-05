@@ -15,6 +15,7 @@ import {
 import { Category } from './category.model';
 import { ProductVariant } from './product-variant.model';
 import { ProductIngredient } from './product-ingredient.model';
+import { OrderItem } from './order-item.model';
 
 @Table({
   tableName: 'products',
@@ -73,4 +74,7 @@ export class Product extends Model<
     as: 'ingredients',
   })
   declare ingredients: ProductIngredient[];
+
+  @HasMany(() => OrderItem, { foreignKey: 'productId', as: 'orderItems' })
+  declare orderItems: OrderItem[];
 }
