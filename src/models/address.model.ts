@@ -8,10 +8,12 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
 import { User } from './user.model';
+import { Order } from './order.model';
 
 @Table({
   tableName: 'addresses',
@@ -58,4 +60,7 @@ export class Address extends Model<
   declare userId: string;
   @BelongsTo(() => User, { foreignKey: 'userId', as: 'user' })
   declare user: User;
+
+  @HasMany(() => Order, { foreignKey: 'addressId', as: 'orders' })
+  declare orders: Order[];
 }
