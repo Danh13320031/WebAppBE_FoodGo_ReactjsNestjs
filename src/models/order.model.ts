@@ -8,11 +8,13 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
 import { User } from './user.model';
 import { Address } from './address.model';
+import { OrderItem } from './order-item.model';
 
 export enum EOrderStatus {
   PENDING = 'pending',
@@ -101,4 +103,7 @@ export class Order extends Model<
   declare addressId: string;
   @BelongsTo(() => Address, { foreignKey: 'addressId', as: 'address' })
   declare address: Address;
+
+  @HasMany(() => OrderItem, { foreignKey: 'orderId', as: 'orderItems' })
+  declare orderItems: OrderItem[];
 }

@@ -8,10 +8,12 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
 import { Product } from './product.model';
+import { OrderItem } from './order-item.model';
 
 export enum EProductVariantSize {
   SMALL = '15cm',
@@ -72,4 +74,7 @@ export class ProductVariant extends Model<
   declare productId: string;
   @BelongsTo(() => Product, { foreignKey: 'productId', as: 'product' })
   declare product: Product;
+
+  @HasMany(() => OrderItem, { foreignKey: 'variantId', as: 'orderItems' })
+  declare orderItems: OrderItem[];
 }
