@@ -8,12 +8,14 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
 import { Order } from './order.model';
 import { Product } from './product.model';
 import { ProductVariant } from './product-variant.model';
+import { OrderItemIngredient } from './order-item-ingredient.model';
 
 @Table({
   tableName: 'order_items',
@@ -51,4 +53,10 @@ export class OrderItem extends Model<
 
   @Column({ type: DataType.INTEGER, defaultValue: 1, allowNull: false })
   declare quantity: CreationOptional<number>;
+
+  @HasMany(() => OrderItemIngredient, {
+    foreignKey: 'orderItemId',
+    as: 'ingredients',
+  })
+  declare ingredients: CreationOptional<OrderItemIngredient[]>;
 }

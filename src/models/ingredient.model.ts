@@ -13,6 +13,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Category } from './category.model';
+import { OrderItemIngredient } from './order-item-ingredient.model';
 
 @Table({
   tableName: 'ingredients',
@@ -59,4 +60,10 @@ export class Ingredient extends Model<
 
   @HasMany(() => Ingredient, { foreignKey: 'categoryId', as: 'ingredients' })
   declare ingredients: Ingredient[];
+
+  @HasMany(() => OrderItemIngredient, {
+    foreignKey: 'ingredientId',
+    as: 'orderItemIngredients',
+  })
+  declare orderItemIngredients: OrderItemIngredient[];
 }
