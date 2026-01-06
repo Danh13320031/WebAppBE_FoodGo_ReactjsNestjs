@@ -14,6 +14,7 @@ import {
 } from 'sequelize-typescript';
 import { Category } from './category.model';
 import { OrderItemIngredient } from './order-item-ingredient.model';
+import { CartItemIngredient } from './cart-item-ingredient.model';
 
 @Table({
   tableName: 'ingredients',
@@ -66,4 +67,10 @@ export class Ingredient extends Model<
     as: 'orderItemIngredients',
   })
   declare orderItemIngredients: OrderItemIngredient[];
+
+  @HasMany(() => CartItemIngredient, {
+    foreignKey: 'ingredientId',
+    as: 'cartItemIngredients',
+  })
+  declare cartItemIngredients: CartItemIngredient[];
 }
