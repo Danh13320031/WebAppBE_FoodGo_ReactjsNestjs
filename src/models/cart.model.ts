@@ -8,10 +8,12 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
 import { User } from './user.model';
+import { CartItem } from './cart-item.model';
 
 @Table({
   tableName: 'carts',
@@ -34,4 +36,7 @@ export class Cart extends Model<
   declare userId: string;
   @BelongsTo(() => User, { foreignKey: 'userId', as: 'user' })
   declare user: User;
+
+  @HasMany(() => CartItem, { foreignKey: 'cartId', as: 'items' })
+  declare items: CartItem[];
 }
