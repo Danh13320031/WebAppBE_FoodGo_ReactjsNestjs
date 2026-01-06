@@ -6,6 +6,7 @@ import type {
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import { Address } from './address.model';
 import { Order } from './order.model';
+import { Cart } from './cart.model';
 
 export enum EUserRole {
   CUSTOMER = 'customer',
@@ -61,4 +62,7 @@ export class User extends Model<
 
   @HasMany(() => Order, { foreignKey: 'userId', as: 'orders' })
   declare orders: Order[];
+
+  @HasMany(() => Cart, { foreignKey: 'userId', as: 'carts' })
+  declare carts: Cart[];
 }
