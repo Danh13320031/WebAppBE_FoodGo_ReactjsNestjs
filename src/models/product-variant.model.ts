@@ -14,6 +14,7 @@ import {
 } from 'sequelize-typescript';
 import { Product } from './product.model';
 import { OrderItem } from './order-item.model';
+import { CartItem } from './cart-item.model';
 
 export enum EProductVariantSize {
   SMALL = '15cm',
@@ -77,4 +78,7 @@ export class ProductVariant extends Model<
 
   @HasMany(() => OrderItem, { foreignKey: 'variantId', as: 'orderItems' })
   declare orderItems: OrderItem[];
+
+  @HasMany(() => CartItem, { foreignKey: 'variantId', as: 'cartItems' })
+  declare cartItems: CartItem[];
 }

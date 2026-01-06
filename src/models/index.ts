@@ -1,4 +1,5 @@
 export { Address } from './address.model';
+export { CartItem } from './cart-item.model';
 export { Cart } from './cart.model';
 export { Category } from './category.model';
 export { Ingredient } from './ingredient.model';
