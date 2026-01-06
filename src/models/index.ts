@@ -3,6 +3,7 @@ export { CartItemIngredient } from './cart-item-ingredient.model';
 export { CartItem } from './cart-item.model';
 export { Cart } from './cart.model';
 export { Category } from './category.model';
+export { Coupon } from './coupon.model';
 export { Ingredient } from './ingredient.model';
 export { OrderItemIngredient } from './order-item-ingredient.model';
 export { OrderItem } from './order-item.model';
