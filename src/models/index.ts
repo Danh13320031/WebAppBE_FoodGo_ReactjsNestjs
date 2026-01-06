@@ -1,6 +1,7 @@
 export { Address } from './address.model';
 export { Category } from './category.model';
 export { Ingredient } from './ingredient.model';
+export { OrderItemIngredient } from './order-item-ingredient.model';
 export { OrderItem } from './order-item.model';
 export {
   EOrderStatus,
