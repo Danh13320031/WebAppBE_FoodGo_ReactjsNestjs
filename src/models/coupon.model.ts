@@ -3,7 +3,8 @@ import type {
   InferAttributes,
   InferCreationAttributes,
 } from 'sequelize';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { UserCoupon } from './user-coupon.model';
 
 export enum ECouponType {
   PERCENTAGE = 'percentage',
@@ -65,4 +66,7 @@ export class Coupon extends Model<
 
   @Column({ type: DataType.BOOLEAN, defaultValue: false, allowNull: false })
   declare isDeleted: CreationOptional<boolean>;
+
+  @HasMany(() => UserCoupon, { foreignKey: 'couponId', as: 'userCoupons' })
+  declare userCoupons: UserCoupon[];
 }
