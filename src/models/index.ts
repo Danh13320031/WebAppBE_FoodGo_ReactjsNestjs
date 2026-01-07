@@ -20,5 +20,6 @@ export {
   ProductVariant,
 } from './product-variant.model';
 export { Product } from './product.model';
+export { Review } from './review.model';
 export { UserCoupon } from './user-coupon.model';
 export { EUserRole, User } from './user.model';

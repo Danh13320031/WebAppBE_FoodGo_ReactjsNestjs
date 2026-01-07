@@ -15,6 +15,7 @@ import {
 import { User } from './user.model';
 import { Address } from './address.model';
 import { OrderItem } from './order-item.model';
+import { Review } from './review.model';
 
 export enum EOrderStatus {
   PENDING = 'pending',
@@ -106,4 +107,7 @@ export class Order extends Model<
 
   @HasMany(() => OrderItem, { foreignKey: 'orderId', as: 'orderItems' })
   declare orderItems: OrderItem[];
+
+  @HasMany(() => Review, { foreignKey: 'orderId', as: 'reviews' })
+  declare reviews: Review[];
 }

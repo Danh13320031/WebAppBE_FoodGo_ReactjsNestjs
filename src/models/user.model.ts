@@ -8,6 +8,7 @@ import { Address } from './address.model';
 import { Order } from './order.model';
 import { Cart } from './cart.model';
 import { UserCoupon } from './user-coupon.model';
+import { Review } from './review.model';
 
 export enum EUserRole {
   CUSTOMER = 'customer',
@@ -69,4 +70,7 @@ export class User extends Model<
 
   @HasMany(() => UserCoupon, { foreignKey: 'userId', as: 'coupons' })
   declare coupons: UserCoupon[];
+
+  @HasMany(() => Review, { foreignKey: 'userId', as: 'reviews' })
+  declare reviews: Review[];
 }
