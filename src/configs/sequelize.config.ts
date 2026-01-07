@@ -1,3 +1,21 @@
+import {
+  Address,
+  Cart,
+  CartItem,
+  CartItemIngredient,
+  Category,
+  Coupon,
+  Ingredient,
+  Order,
+  OrderItem,
+  OrderItemIngredient,
+  Product,
+  ProductIngredient,
+  ProductVariant,
+  Review,
+  User,
+  UserCoupon,
+} from '@/models';
 import { ConfigService } from '@nestjs/config';
 import { SequelizeModuleOptions } from '@nestjs/sequelize';
 import { Dialect } from 'sequelize';
@@ -15,4 +33,23 @@ export const sequelizeConfig = (
   database: configService.get<string>('DB_NAME'),
   autoLoadModels: true,
   synchronize: true,
+  logging: false,
+  models: [
+    Address,
+    CartItemIngredient,
+    CartItem,
+    Cart,
+    Category,
+    Coupon,
+    Ingredient,
+    OrderItemIngredient,
+    OrderItem,
+    Order,
+    ProductIngredient,
+    ProductVariant,
+    Product,
+    Review,
+    UserCoupon,
+    User,
+  ],
 });

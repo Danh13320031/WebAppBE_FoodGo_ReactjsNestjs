@@ -38,10 +38,10 @@ export enum EPaymentStatus {
   REFUNDED = 'refunded',
 }
 
-Table({
+@Table({
   tableName: 'orders',
   timestamps: true,
-});
+})
 export class Order extends Model<
   InferAttributes<Order>,
   InferCreationAttributes<Order>

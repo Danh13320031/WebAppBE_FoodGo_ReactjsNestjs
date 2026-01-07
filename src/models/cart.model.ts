@@ -32,8 +32,8 @@ export class Cart extends Model<
   declare id: CreationOptional<string>;
 
   @ForeignKey(() => User)
-  @Column({ type: DataType.UUID, allowNull: false })
-  declare userId: string;
+  @Column({ type: DataType.UUID, allowNull: true })
+  declare userId: string | null;
   @BelongsTo(() => User, { foreignKey: 'userId', as: 'user' })
   declare user: User;
 
