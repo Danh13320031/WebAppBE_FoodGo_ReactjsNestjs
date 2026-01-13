@@ -5,6 +5,7 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
+import { LOCALE, TIMEZONE } from '../constants/index.constant';
 import { IApiResponse } from '../interfaces';
 
 @Injectable()
@@ -32,6 +33,9 @@ export class TransformInterceptor<T> implements NestInterceptor<
     next: CallHandler,
   ): Observable<IApiResponse<T>> {
     const request = context.switchToHttp().getRequest();
+    const startTime: number = Number(request['startTime']);
+    const endTime: number = Date.now();
+    const takenTime: string = `${endTime - startTime} ms`;
 
     return next.handle().pipe(
       map((data: any) => {
@@ -54,8 +58,12 @@ export class TransformInterceptor<T> implements NestInterceptor<
           success: true,
           message: finalMessage,
           data,
-          date: new Date(),
+          date: new Date().toLocaleString(LOCALE, {
+            timeZone: TIMEZONE,
+            hour12: false,
+          }),
           path: request.url,
+          takenTime,
         };
       }),
     );

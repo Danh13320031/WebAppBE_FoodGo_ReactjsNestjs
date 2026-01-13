@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { AllExceptionFilter } from './common/filters/all-exception.filter';
 import { TransformInterceptor } from './common/interceptors/response.interceptor';
 
 async function bootstrap() {
@@ -18,6 +19,7 @@ async function bootstrap() {
   );
 
   app.useGlobalInterceptors(new TransformInterceptor());
+  app.useGlobalFilters(new AllExceptionFilter());
 
   await app.listen(port);
   console.log(`Application is running on: http://localhost:${port}`);
