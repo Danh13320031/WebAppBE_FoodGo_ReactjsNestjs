@@ -2,7 +2,7 @@ export interface IApiResponse<T> {
   success: boolean;
   message: string;
   data?: T;
-  date?: Date;
+  date?: Date | string;
   path?: string;
-  // takenTime: number;
+  takenTime?: string;
 }
