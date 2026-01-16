@@ -1,7 +1,8 @@
 import { Category } from '@/models';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { InjectModel } from '@nestjs/sequelize';
+import { Helper } from '@/common/utils/helpers';
 
 @Injectable()
 export class CategoryService {
@@ -11,6 +12,14 @@ export class CategoryService {
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
-    return this.categoryModel.create(createCategoryDto as any);
+    const alreadyExists = await this.categoryModel.findOne({
+      where: { slug: Helper.makeSlugFromString(createCategoryDto.name) },
+    });
+
+    if (alreadyExists)
+      throw new BadRequestException('Danh mục món ăn đã tồn tại');
+
+    await this.categoryModel.create(createCategoryDto as any);
+    return { message: 'Tạo danh mục món ăn thành công' };
   }
 }

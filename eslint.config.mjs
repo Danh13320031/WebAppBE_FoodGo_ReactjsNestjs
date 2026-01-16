@@ -34,6 +34,7 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-unsafe-arguments': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
+      'no-useless-escape': 'off',
       'prettier/prettier': ['error', { endOfLine: 'auto' }],
     },
   },

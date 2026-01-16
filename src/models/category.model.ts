@@ -1,9 +1,11 @@
+import { Helper } from '@/common/utils/helpers';
 import type {
   CreationOptional,
   InferAttributes,
   InferCreationAttributes,
 } from 'sequelize';
 import {
+  BeforeValidate,
   BelongsTo,
   Column,
   DataType,
@@ -12,8 +14,8 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Product } from './product.model';
 import { Ingredient } from './ingredient.model';
+import { Product } from './product.model';
 
 @Table({
   tableName: 'categories',
@@ -65,4 +67,14 @@ export class Category extends Model<
 
   @HasMany(() => Ingredient, { foreignKey: 'categoryId', as: 'ingredients' })
   declare ingredients: Ingredient[];
+
+  @BeforeValidate
+  static makeSlug(newCategory: Category): void {
+    const name: string = newCategory.dataValues.name;
+
+    if (name) {
+      const slug: string = Helper.makeSlugFromString(name);
+      newCategory.setDataValue('slug', slug);
+    }
+  }
 }
