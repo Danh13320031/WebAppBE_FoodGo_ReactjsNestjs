@@ -9,10 +9,10 @@ import {
 } from 'class-validator';
 
 export class CreateCategoryDto {
-  @IsString({ message: 'ID phải là một chuỗi' })
-  @IsNotEmpty({ message: 'ID không được phép trống' })
-  @MaxLength(36, { message: 'ID không được vượt quá 36 ký tự' })
-  id: string;
+  // @IsString({ message: 'ID phải là một chuỗi' })
+  // @IsNotEmpty({ message: 'ID không được phép trống' })
+  // @MaxLength(36, { message: 'ID không được vượt quá 36 ký tự' })
+  // id: string;
 
   @IsString({ message: 'Tên phải là một chuỗi' })
   @IsNotEmpty({ message: 'Tên không được để trống' })
