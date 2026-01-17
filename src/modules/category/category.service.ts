@@ -1,8 +1,8 @@
+import { Helper } from '@/common/utils/helpers';
 import { Category } from '@/models';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateCategoryDto } from './dto/create-category.dto';
 import { InjectModel } from '@nestjs/sequelize';
-import { Helper } from '@/common/utils/helpers';
+import { CreateCategoryDto } from './dto/create-category.dto';
 
 @Injectable()
 export class CategoryService {
@@ -21,5 +21,15 @@ export class CategoryService {
 
     await this.categoryModel.create(createCategoryDto as any);
     return { message: 'Tạo danh mục món ăn thành công' };
+  }
+
+  async findAll() {
+    return await this.categoryModel.findAll({
+      where: { isDeleted: false, isActived: true },
+      order: [['sortOrder', 'DESC']],
+      attributes: {
+        exclude: ['createdAt', 'updatedAt'],
+      },
+    });
   }
 }
