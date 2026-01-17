@@ -5,6 +5,7 @@ import type {
   InferCreationAttributes,
 } from 'sequelize';
 import {
+  BeforeUpdate,
   BeforeValidate,
   BelongsTo,
   Column,
@@ -72,9 +73,20 @@ export class Category extends Model<
   static makeSlug(newCategory: Category): void {
     const name: string = newCategory.dataValues.name;
 
-    if (name) {
+    if (newCategory.isNewRecord && name) {
       const slug: string = Helper.makeSlugFromString(name);
       newCategory.setDataValue('slug', slug);
+    }
+  }
+
+  @BeforeUpdate
+  static updateSlug(updatedCategory: Category): void {
+    if (updatedCategory.changed('name')) {
+      const name: string = updatedCategory.dataValues.name;
+      const slug: string = Helper.makeSlugFromString(name);
+
+      console.log({ slug, name });
+      updatedCategory.setDataValue('slug', slug);
     }
   }
 }

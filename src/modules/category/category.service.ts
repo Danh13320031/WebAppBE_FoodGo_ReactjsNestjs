@@ -3,6 +3,7 @@ import { Category } from '@/models';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateCategoryDto } from './dto/create-category.dto';
+import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
 export class CategoryService {
@@ -31,5 +32,18 @@ export class CategoryService {
         exclude: ['createdAt', 'updatedAt'],
       },
     });
+  }
+
+  async update(id: string, updateCategoryDto: UpdateCategoryDto): Promise<any> {
+    const alreadyExists = await this.categoryModel.findByPk(id);
+    if (!alreadyExists)
+      throw new BadRequestException('Danh mục món ăn không tồn tại');
+
+    await alreadyExists.update(updateCategoryDto);
+
+    return {
+      message: 'Cập nhật danh mục món ăn thành công',
+      id: alreadyExists.id,
+    };
   }
 }
