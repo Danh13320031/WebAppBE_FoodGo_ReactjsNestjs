@@ -85,7 +85,6 @@ export class Category extends Model<
       const name: string = updatedCategory.dataValues.name;
       const slug: string = Helper.makeSlugFromString(name);
 
-      console.log({ slug, name });
       updatedCategory.setDataValue('slug', slug);
     }
   }
