@@ -58,4 +58,12 @@ export class CategoryService {
       message: 'Xóa mềm danh mục món ăn thành công',
     };
   }
+
+  async hardDelete(id: string) {
+    await this.categoryModel.destroy({ where: { id }, cascade: true });
+
+    return {
+      message: 'Xóa cứng danh mục món ăn thành công',
+    };
+  }
 }
