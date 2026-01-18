@@ -37,4 +37,9 @@ export class CategoryController {
   async softDelete(@Param('id') id: string) {
     return await this.categoryService.softDelete(id);
   }
+
+  @Delete('hard-delete/:id')
+  async hardDelete(@Param('id') id: string) {
+    return await this.categoryService.hardDelete(id);
+  }
 }
