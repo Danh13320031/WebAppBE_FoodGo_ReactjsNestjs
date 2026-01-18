@@ -36,14 +36,26 @@ export class CategoryService {
 
   async update(id: string, updateCategoryDto: UpdateCategoryDto): Promise<any> {
     const alreadyExists = await this.categoryModel.findByPk(id);
+
     if (!alreadyExists)
       throw new BadRequestException('Danh mục món ăn không tồn tại');
-
     await alreadyExists.update(updateCategoryDto);
 
     return {
       message: 'Cập nhật danh mục món ăn thành công',
       id: alreadyExists.id,
+    };
+  }
+
+  async softDelete(id: string) {
+    const alreadyExists = await this.categoryModel.findByPk(id);
+
+    if (!alreadyExists)
+      throw new BadRequestException('Danh mục món ăn không tồn tại');
+    await alreadyExists.update({ isDeleted: true });
+
+    return {
+      message: 'Xóa mềm danh mục món ăn thành công',
     };
   }
 }
