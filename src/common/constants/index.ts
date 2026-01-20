@@ -9,3 +9,7 @@ export const SWAGGER_API_DESCRIPTION =
 export const SWAGGER_API_VERSION = '1.0.0';
 export const SWAGGER_API_TAG = 'FoodGo E-Commerce';
 export const SWAGGER_API_VERSION_ROUTE = 'api/v1';
+
+// Auth constants
+export const PASSWORD_REGEX =
+  /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/;
