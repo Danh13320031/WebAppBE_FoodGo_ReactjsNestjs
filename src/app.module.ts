@@ -9,6 +9,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { LoggerMiddleware } from './common/middlewares/start-timing.middleware';
 import { sequelizeConfig } from './configs/sequelize.config';
 import { CategoryModule } from './modules/category/category.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CategoryModule } from './modules/category/category.module';
       useFactory: sequelizeConfig,
     }),
     CategoryModule,
+    UserModule,
   ],
 })
 export class AppModule implements NestModule {
