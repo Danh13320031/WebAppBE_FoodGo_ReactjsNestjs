@@ -5,7 +5,7 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
-import { LOCALE, TIMEZONE } from '../constants/index.constant';
+import { LOCALE, TIMEZONE } from '../constants';
 import { IApiResponse } from '../interfaces';
 
 @Injectable()

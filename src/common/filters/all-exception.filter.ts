@@ -7,7 +7,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { LOCALE, TIMEZONE } from '../constants/index.constant';
+import { LOCALE, TIMEZONE } from '../constants';
 import { IApiResponse } from '../interfaces';
 
 @Catch()
