@@ -56,6 +56,9 @@ export class User extends Model<
   })
   declare role: CreationOptional<EUserRole>;
 
+  @Column({ type: DataType.BOOLEAN, defaultValue: true, allowNull: false })
+  declare isActived: CreationOptional<boolean>;
+
   @Column({ type: DataType.BOOLEAN, defaultValue: false, allowNull: false })
   declare isDeleted: CreationOptional<boolean>;
 
