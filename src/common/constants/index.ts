@@ -11,5 +11,6 @@ export const SWAGGER_API_TAG = 'FoodGo E-Commerce';
 export const SWAGGER_API_VERSION_ROUTE = 'api/v1';
 
 // Auth constants
+export const SALT_ROUNDS = 10;
 export const PASSWORD_REGEX =
   /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/;
