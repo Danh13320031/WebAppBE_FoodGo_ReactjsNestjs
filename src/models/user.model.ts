@@ -1,14 +1,23 @@
+import { SALT_ROUNDS } from '@/common/constants';
+import * as bcrypt from 'bcrypt';
 import type {
   CreationOptional,
   InferAttributes,
   InferCreationAttributes,
 } from 'sequelize';
-import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import {
+  BeforeValidate,
+  Column,
+  DataType,
+  HasMany,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 import { Address } from './address.model';
-import { Order } from './order.model';
 import { Cart } from './cart.model';
-import { UserCoupon } from './user-coupon.model';
+import { Order } from './order.model';
 import { Review } from './review.model';
+import { UserCoupon } from './user-coupon.model';
 
 export enum EUserRole {
   CUSTOMER = 'customer',
@@ -76,4 +85,24 @@ export class User extends Model<
 
   @HasMany(() => Review, { foreignKey: 'userId', as: 'reviews' })
   declare reviews: Review[];
+
+  @BeforeValidate
+  static hasPassword(user: User) {
+    if (user.isNewRecord) {
+      const password: string = user.get('password');
+      const hashedPassword: string = bcrypt.hashSync(password, SALT_ROUNDS);
+
+      user.setDataValue('password', hashedPassword);
+    }
+  }
+
+  comparePassword(password: string): boolean {
+    const { password: passwordInDb } = this.get({ plain: true });
+    return bcrypt.compareSync(password, passwordInDb);
+  }
+
+  getUserWithoutPassword() {
+    const { password: _, ...userWithoutPassword } = this.get({ plain: true });
+    return userWithoutPassword;
+  }
 }
