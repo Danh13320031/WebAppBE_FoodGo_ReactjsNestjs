@@ -43,7 +43,7 @@ export class CategoryService {
 
     return {
       message: 'Cập nhật danh mục món ăn thành công',
-      id: alreadyExists.id,
+      data: { id: alreadyExists.id },
     };
   }
 
