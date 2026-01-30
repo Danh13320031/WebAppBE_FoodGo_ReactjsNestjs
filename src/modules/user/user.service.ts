@@ -15,7 +15,7 @@ export class UserService {
     return await this.userModel.findOne({ where: { email } });
   }
 
-  async validateUser(email: string, password: string) {
+  async validateUser(email: string, password: string): Promise<any> {
     const user = await this.findByEmail(email);
 
     if (!user) throw new BadGatewayException('Người dùng không tồn tại');
@@ -25,17 +25,19 @@ export class UserService {
     if (!isCorrectPassword)
       throw new BadGatewayException('Mật khẩu không chính xác');
 
-    // Trả về access token hoặc thông tin người dùng
-    const plainUser = user.getUserWithoutPassword();
-    const accessToken = await this.jwtService.signAsync({
-      uid: plainUser.id,
-      role: plainUser.role,
-    });
+    // const plainUser = user.getUserWithoutPassword();
+    // const accessToken = await this.jwtService.signAsync({
+    //   uid: plainUser.id,
+    //   role: plainUser.role,
+    // });
+    const plainUser = user.toJSON();
 
-    return {
-      message: 'Đăng nhập thành công',
-      accessToken,
-    };
+    return { id: plainUser.id, role: plainUser.role };
+
+    // {
+    //   message: 'Đăng nhập thành công',
+    //   accessToken,
+    // };
   }
 
   async register(createUserDto: CreateUserDto) {
