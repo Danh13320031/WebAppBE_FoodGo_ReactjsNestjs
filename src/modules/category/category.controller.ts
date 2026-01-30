@@ -6,8 +6,11 @@ import {
   Param,
   Patch,
   Post,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { JwtGuard } from '../auth/guards/jwt.guard';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -24,8 +27,10 @@ export class CategoryController {
   }
 
   @ApiOperation({ summary: 'Lấy tất cả danh mục' })
+  @UseGuards(JwtGuard)
   @Get('all')
-  async findAll() {
+  async findAll(@Req() req: any) {
+    console.log(req.user);
     return await this.categoryService.findAll();
   }
 
