@@ -13,6 +13,7 @@ import { sequelizeConfig } from './configs/sequelize.config';
 import { AuthModule } from './modules/auth/auth.module';
 import { CategoryModule } from './modules/category/category.module';
 import { UserModule } from './modules/user/user.module';
+import { SeedModule } from './modules/seed/seed.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { UserModule } from './modules/user/user.module';
       }),
       global: true,
     }),
+    SeedModule,
   ],
 })
 export class AppModule implements NestModule {
