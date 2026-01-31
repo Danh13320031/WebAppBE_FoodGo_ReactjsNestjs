@@ -18,4 +18,10 @@ export class SeedController {
   seedCategory() {
     return this.seedService.seedCategory();
   }
+
+  @ApiOperation({ summary: 'Tạo dữ liệu đồ ăn kèm' })
+  @Get('/ingredient')
+  seedIngredient() {
+    return this.seedService.seedIngredient();
+  }
 }
