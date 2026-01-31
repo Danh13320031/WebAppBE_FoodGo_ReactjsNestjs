@@ -1,15 +1,17 @@
 import { SALT_ROUNDS } from '@/common/constants';
-import { Category, User } from '@/models';
+import { Category, Ingredient, User } from '@/models';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import * as bcrypt from 'bcrypt';
-import { categories, users } from './data';
+import { categories, ingredients, users } from './data';
 
 @Injectable()
 export class SeedService {
   constructor(
     @InjectModel(User) private readonly userModel: typeof User,
     @InjectModel(Category) private readonly categoryModel: typeof Category,
+    @InjectModel(Ingredient)
+    private readonly ingredientModel: typeof Ingredient,
   ) {}
 
   async seedUser() {
@@ -23,5 +25,9 @@ export class SeedService {
 
   async seedCategory() {
     return await this.categoryModel.bulkCreate(categories as any);
+  }
+
+  async seedIngredient() {
+    return await this.ingredientModel.bulkCreate(ingredients as any);
   }
 }
