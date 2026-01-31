@@ -12,4 +12,10 @@ export class SeedController {
   seedUser() {
     return this.seedService.seedUser();
   }
+
+  @ApiOperation({ summary: 'Tạo dữ liệu danh mục món ăn' })
+  @Get('/category')
+  seedCategory() {
+    return this.seedService.seedCategory();
+  }
 }
